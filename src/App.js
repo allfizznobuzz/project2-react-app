@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import HouseCard from './components/HouseCard';
+import React, { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [greeting, setGreeting] = useState(
+    'Hello Function Component!'
+  );
+
+  const handleChange = event => setGreeting(event.target.value);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Headline headline={greeting} />
+
+      <Input value={greeting} onChangeInput={handleChange}>
+        Set Greeting:
+      </Input>
     </div>
   );
-}
+};
+
+const Headline = ({ headline }) => <h1>{headline}</h1>;
+
+const Input = ({ value, onChangeInput, children }) => (
+  <label>
+    {children}
+    <input type="text" value={value} onChange={onChangeInput} />
+  </label>
+);
 
 export default App;
